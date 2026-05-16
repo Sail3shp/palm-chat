@@ -8,6 +8,7 @@ dotenv.config()
 
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 console.log(process.env.PORT)
 const PORT = process.env.PORT || 8848
 
