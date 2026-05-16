@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 import { connectDb } from './config/connectDb.js'
 import authRouter from './routes/auth.routes.js'
 import cookieParser from 'cookie-parser'
+import chatRouter from './routes/chat.routes.js'
+import { getStats } from './controller/stats.controller.js'
 
 dotenv.config()
 
@@ -13,6 +15,8 @@ console.log(process.env.PORT)
 const PORT = process.env.PORT || 8848
 
 app.use('/api/v1/auth',authRouter)
+app.use('/api/v1/chat',chatRouter)
+app.get('/stats',getStats)
 app.get('/health',(req,res) => {
     res.send("All good")
 })

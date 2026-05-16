@@ -46,8 +46,8 @@ export const deleteUser = async (req, res) => {
                 message: "Unauthorized"
             })
         }
-        await findByIdAndDelete(userId)
-        res.status(204)
+        await User.findByIdAndDelete(req.userId)
+        res.status(204).json("user removed")
     } catch (error) {
         console.log('error in delete user', error)
         res.status(500).json({ error: "Internal server error" })
