@@ -1,12 +1,20 @@
 import express from 'express'
-import { register } from '../controller/auth.controller.js'
+import { register,login,logout } from '../controller/auth.controller.js'
+import { deleteUser, updateUser } from '../controller/user.controller.js'
+import { verifyUser } from '../middleware/verifyUser.js'
 
 const authRouter = express.Router()
 
-//user creation model
-//authRouter.post('/login',login)
+//auth  model
+authRouter.post('/login',login)
 authRouter.post('/register',register)
-//authRouter.post('/logout',logout)
+authRouter.post('/logout',logout)
+
+//user operation 
+
+authRouter.patch('/update/:id',verifyUser,updateUser)
+authRouter.delete('/delete/:id',verifyUser,deleteUser)
+
 
 
 export default authRouter
