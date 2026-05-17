@@ -18,8 +18,10 @@ io.on("connection",(socket) => {
     console.log('a user connected',socket.id)
 
     const username = socket.handshake.query.username
-    if(username != 'undefined') userSocketMap[username] = socket.id
-
+    console.log(username)
+    if(username ) {
+        userSocketMap[username] = socket.id
+    }
     io.emit('joinedUsers',Object.keys(userSocketMap))
 
     socket.on("sendMessage",(messageData) => {
