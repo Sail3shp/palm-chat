@@ -1,5 +1,5 @@
 import express from 'express'
-import { register,login,logout } from '../controller/auth.controller.js'
+import { register,login,logout, getMe } from '../controller/auth.controller.js'
 import { deleteUser, updateUser } from '../controller/user.controller.js'
 import { verifyUser } from '../middleware/verifyUser.js'
 
@@ -14,6 +14,7 @@ authRouter.post('/logout',logout)
 
 authRouter.patch('/update/:id',verifyUser,updateUser)
 authRouter.delete('/delete/:id',verifyUser,deleteUser)
+authRouter.get('/me',verifyUser,getMe)
 
 
 
