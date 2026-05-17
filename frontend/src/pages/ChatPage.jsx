@@ -87,17 +87,17 @@ const ChatPage = () => {
             </div>
             <div className="w-full max-w-7xl p-4  mx-auto ">
                 <div className="flex flex-col max-w-full justify-center items-center">
-                    {messages.map((message) => (
-                        <div key={message._id} className="flex gap-4">
+                    {messages.map((message,index) => (
+                        <div key={index} className="flex gap-4">
                             <h1>[{message.sender.username}]</h1>
                             <p>{message.message}</p>
                         </div>
                     ))}
-                    <div>
-                        <h1>Online Users</h1>
+                    <div className="flex gap-4">
+                        <h1 className="font-bold">Online Users:</h1>
 
-                        {joinedUsers.map((user, index) => (
-                            <p key={index}>{user}</p>
+                        {joinedUsers.map((joinedUser, index) => (
+                            <p key={index}>{joinedUser}</p>
                         ))}
                     </div>
 
@@ -115,6 +115,7 @@ const ChatPage = () => {
 
                         <button
                             onClick={handleSubmit}
+                            disabled={true}
                             className="hover:scale-110 duration-150
                         absolute right-0 mr-2 text-lg cursor-pointer rounded-full p-1 "><CircleArrowRight /></button>
                     </div>

@@ -1,17 +1,29 @@
 import { useState,useEffect } from "react"
+import { Link,useNavigate } from "react-router"
+import { useAuth } from "../context/AuthContext"
+import api from "../utils/axiosInstance"
 const SignupPage = () => {
     const [formData,setFormData] = useState({
         username:'',
         email:'',
         password:''
     })
+    const {register} = useAuth()
+    const navigate = useNavigate()
 
-    const handleFormSubmit =(e) => {
+    const handleFormSubmit =async(e) => {
         e.preventDefault()
+        try {
+            const res = await register(formData) 
+            if(res.success){
+                alert('account successfully registered')
+                navigate('/')
+            }
+        } catch (error) {
+            console.log(error) 
+        }
 
     }
-    useEffect(() => {
-    },[])
     return (
         <form 
         onSubmit={handleFormSubmit}
@@ -45,7 +57,7 @@ const SignupPage = () => {
                 </div>
             </div>
             <button className="bg-blue-500 p-2 rounded-lg cursor-pointer transition text-white duration-100  ">Create an account </button>
-            <p>Already have an account? <a to={'/login'} className="text-lg font-medium text-blue-500">Login</a></p>
+            <p>Already have an account? <Link to={'/login'} className="text-lg font-medium text-blue-500">Login</Link></p>
 
         </form>
     )
